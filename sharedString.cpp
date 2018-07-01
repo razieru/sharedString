@@ -29,6 +29,16 @@ bool nsfw::sharedString::operator ==(const nsfw::sharedString &_sharedString)
     return true;
 }
 
+bool nsfw::sharedString::operator!=(const nsfw::sharedString &_sharedString)
+{
+    return !(this->operator==(_sharedString));
+}
+
+nsfw::sharedString nsfw::sharedString::operator+(const nsfw::sharedString &_sharedString)
+{
+    return {};
+}
+
 nsfw::sharedString::sharedString()
 {
     if (m_str != nullptr)

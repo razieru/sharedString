@@ -19,6 +19,8 @@ public:
     sharedString& operator= (const char* _other);
     const char* c_str() const;
     bool operator== (const sharedString& _sharedString);
+    bool operator!= (const sharedString& _sharedString);
+    sharedString operator+ (const sharedString& _sharedString);
 };
 std::ostream& operator<< (std::ostream& out, const sharedString& _sharedString);
 std::istream& operator>> (std::istream& in, sharedString& _sharedString);
