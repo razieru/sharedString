@@ -78,6 +78,15 @@ nsfw::sharedString nsfw::sharedString::operator+(const nsfw::sharedString &_shar
     return newSharedString;
 }
 
+char& nsfw::sharedString::operator[](unsigned int _index)
+{
+    return m_str[_index];
+}
+
+char nsfw::sharedString::operator[](unsigned int _index) const
+{
+    return m_str[_index];
+}
 
 nsfw::sharedString::~sharedString()
 {

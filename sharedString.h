@@ -24,6 +24,8 @@ public:
     bool operator== (const sharedString& _sharedString);
     bool operator!= (const sharedString& _sharedString);
     sharedString operator+ (const sharedString& _sharedString);
+    char& operator[] (unsigned int _index);
+    char operator[] (unsigned int _index) const;
 };
 std::ostream& operator<< (std::ostream& out, const sharedString& _sharedString);
 std::istream& operator>> (std::istream& in, sharedString& _sharedString);
