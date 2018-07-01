@@ -21,9 +21,9 @@ public:
     unsigned int size() const;
     sharedString& operator= (const char* _other);
     const char* c_str() const;
-    bool operator== (const sharedString& _sharedString);
-    bool operator!= (const sharedString& _sharedString);
-    sharedString operator+ (const sharedString& _sharedString);
+    bool operator== (const sharedString& _sharedString) const;
+    bool operator!= (const sharedString& _sharedString) const;
+    sharedString operator+ (const sharedString& _sharedString) const;
     char& operator[] (unsigned int _index);
     char operator[] (unsigned int _index) const;
 };

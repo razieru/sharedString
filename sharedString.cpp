@@ -44,7 +44,7 @@ void nsfw::sharedString::setString(const char *_str, unsigned int _size)
     m_str[m_length] = '\0';
 }
 
-bool nsfw::sharedString::operator ==(const nsfw::sharedString &_sharedString)
+bool nsfw::sharedString::operator ==(const nsfw::sharedString &_sharedString) const
 {
     if (this->m_length != _sharedString.m_length)
         return false;
@@ -55,12 +55,12 @@ bool nsfw::sharedString::operator ==(const nsfw::sharedString &_sharedString)
     return true;
 }
 
-bool nsfw::sharedString::operator!=(const nsfw::sharedString &_sharedString)
+bool nsfw::sharedString::operator!=(const nsfw::sharedString &_sharedString) const
 {
     return !(this->operator==(_sharedString));
 }
 
-nsfw::sharedString nsfw::sharedString::operator+(const nsfw::sharedString &_sharedString)
+nsfw::sharedString nsfw::sharedString::operator+(const nsfw::sharedString &_sharedString) const
 {
     char* newStr = new char[this->m_length + _sharedString.size() + 1];
     unsigned int i = 0,j = 0;
