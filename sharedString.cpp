@@ -4,11 +4,21 @@ nsfw::sharedString::sharedString()
 {
     m_str = nullptr;
     m_length = 0;
+    m_refCount = new unsigned int(0);
 }
 
 nsfw::sharedString::sharedString(const nsfw::sharedString &_other)
 {
-    setString(_other.c_str(),_other.size());
+    if ((m_refCount != nullptr) && (*m_refCount > 0))
+        (*m_refCount)--;
+    else {
+        m_refCount = (unsigned int*)_other.use_count();
+        (*m_refCount)++;
+        if (m_str != nullptr)
+            delete[] this->m_str;
+        m_length = _other.size();
+        m_str = (char*)_other.c_str();
+    }
 }
 
 nsfw::sharedString::sharedString(const char *_str)
@@ -37,6 +47,9 @@ void nsfw::sharedString::setString(const char *_str, unsigned int _size)
 {
     if (m_str != nullptr)
         delete[] this->m_str;
+    if (m_refCount != nullptr)
+        delete m_refCount;
+    m_refCount = new unsigned int(0);
     m_length = _size;
     m_str = new char[m_length+1];
     for (unsigned int i = 0; i < m_length; ++i)
@@ -92,12 +105,21 @@ nsfw::sharedString::~sharedString()
 {
     if (m_refCount == 0)
         delete[] m_str;
+    else
+        (*m_refCount)--;
 }
 
 nsfw::sharedString &nsfw::sharedString::operator =(const char *_other)
 {
     if (m_str != _other)
         setString(_other);
+    return *this;
+}
+
+nsfw::sharedString &nsfw::sharedString::operator=(const nsfw::sharedString &_other)
+{
+    if (m_str != _other.c_str())
+        setString(_other.c_str());
     return *this;
 }
 
@@ -109,6 +131,11 @@ const char *nsfw::sharedString::c_str() const
 unsigned int nsfw::sharedString::size() const
 {
     return m_length;
+}
+
+const unsigned int *nsfw::sharedString::use_count() const
+{
+    return const_cast<unsigned int*>(m_refCount);
 }
 
 std::ostream &nsfw::operator <<(std::ostream &out, const nsfw::sharedString &_sharedString)
