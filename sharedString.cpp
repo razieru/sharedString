@@ -51,11 +51,13 @@ void nsfw::sharedString::copyString(const char *_str, unsigned int _size)
 
 void nsfw::sharedString::setNewRef(const nsfw::sharedString &_other)
 {
-    breakaway();
-    m_length = _other.size();
-    m_refCount = (unsigned int*)_other.use_count();
-    ++(*m_refCount);
-    m_str = (char*)_other.c_str();
+    if ((_other.c_str() != nullptr) && (_other.use_count() != nullptr)) {
+        breakaway();
+        m_length = _other.size();
+        m_refCount = (unsigned int*)_other.use_count();
+        ++(*m_refCount);
+        m_str = (char*)_other.c_str();
+    }
 }
 
 void nsfw::sharedString::breakaway()
@@ -120,11 +122,14 @@ char nsfw::sharedString::operator[](unsigned int _index) const
 
 nsfw::sharedString::~sharedString()
 {
-    if (*m_refCount == 0) {
-        delete[] m_str;
-        delete m_refCount;
-    } else
-        --(*m_refCount);
+    if (m_refCount != nullptr) {
+        if (*m_refCount == 0) {
+            delete m_refCount;
+            if (m_str != nullptr)
+                delete[] m_str;
+        } else
+            --(*m_refCount);
+    }
 }
 
 nsfw::sharedString &nsfw::sharedString::operator =(const char *_other)
