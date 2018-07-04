@@ -10,6 +10,9 @@ class sharedString
     unsigned int getLength(const char* _str);
     void setString(const char* _str);
     void setString(const char* _str, unsigned int _size);
+    void copyString(const char* _str, unsigned int _size);
+    void setNewRef(const sharedString& _other);
+    void breakaway();
 public:
     sharedString();
     sharedString(const sharedString& _other);
@@ -18,7 +21,6 @@ public:
     ~sharedString();
     unsigned int size() const;
     const unsigned int* use_count() const;
-
     sharedString& operator= (const char* _other);
     sharedString& operator= (const sharedString& _other);
     const char* c_str() const;
