@@ -8,7 +8,7 @@ int main()
     nsfw::sharedString str2(str1);
     nsfw::sharedString str3 = str2;
 
-    str1[0] = 'Z';
+    std::cout << str1[0] << std::endl;
     std::cout << str1 << " " << str2 << " " << str3 << std::endl;
     return 0;
 }
