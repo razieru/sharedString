@@ -11,7 +11,7 @@ Window {
 
 	property int rows: 9
 	property int cols: 9
-	color: "#F0F0F0"
+	color: "#FFF0F0F0"
 
 
 
