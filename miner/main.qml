@@ -11,7 +11,11 @@ Window {
 
 	property int rows: 9
 	property int cols: 9
+<<<<<<< HEAD
 	color: "#FFF0F0F0"
+=======
+	color: "#F0F0F0"
+>>>>>>> miner_branch
 
 
 
