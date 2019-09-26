@@ -79,6 +79,7 @@ bool nsfw::sharedString::operator ==(const nsfw::sharedString &_sharedString) co
 {
     if (this->m_length != _sharedString.m_length)
         return false;
+        
     for (unsigned int i = 0; i < this->m_length; ++i)
         if (this->m_str[i] != _sharedString.m_str[i])
             return false;
